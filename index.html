@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Viltbutiken Öregrund – Handplockat från skogens skafferi. Vilt, fisk, skinn och hantverk från Roslagen.">
+  <title>Viltbutiken Öregrund</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:      #F5F0E8;
+      --text:    #1C1C1A;
+      --accent:  #1D3D2B;
+      --divider: #C8BFB0;
+      --f-head:  'Cormorant Garamond', Georgia, serif;
+      --f-body:  'Lora', Georgia, serif;
+      --f-ui:    system-ui, -apple-system, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--f-body);
+      font-size: 18px;
+      line-height: 1.75;
+    }
+
+    img { max-width: 100%; height: auto; display: block; }
+    a   { color: inherit; }
+
+    /* ── Layout ──────────────────────────────────────────────── */
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 1.75rem;
+    }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .two-col { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    /* ── Header / Hero ───────────────────────────────────────── */
+    header {
+      text-align: center;
+      padding: 5.5rem 1.5rem 2rem;
+    }
+    .site-logo {
+      width: 300.px; height: 300px;
+      object-fit: contain;
+      margin: 0 auto 1.75rem;
+    }
+    .site-title {
+      font-family: var(--f-head);
+      font-size: clamp(2rem, 6vw, 3.6rem);
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.03em;
+      line-height: 1.15;
+      margin-bottom: 0.55rem;
+    }
+    .site-tagline {
+      font-family: var(--f-head);
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      font-style: italic;
+      opacity: 0.68;
+    }
+
+    /* ── Branch divider ──────────────────────────────────────── */
+    .branch-divider {
+      display: flex;
+      justify-content: center;
+      padding: 0 rem 0;
+    }
+    .branch-divider img {
+      width: 210px; max-width: 55%;
+      opacity: 0.82;
+    }
+
+    /* ── Sections ────────────────────────────────────────────── */
+    section { padding: 4rem 0; }
+
+    .section-heading {
+      font-family: var(--f-head);
+      font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+      font-style: italic;
+      font-weight: 500;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+      line-height: 1.15;
+    }
+    .body-text p + p { margin-top: 1rem; }
+
+    /* ── Photo placeholder ───────────────────────────────────── */
+    .photo-placeholder {
+      background: #DDDDDD;
+      aspect-ratio: 4 / 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #888;
+      font: 0.78rem/1.5 var(--f-ui);
+      text-align: center;
+      padding: 1rem;
+    }
+
+    /* ── Products ────────────────────────────────────────────── */
+    .product-group { margin-bottom: 1.5rem; }
+    .product-group-label {
+      font: 700 0.63rem/1 var(--f-ui);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+    .product-list { list-style: none; }
+    .product-list li {
+      position: relative;
+      padding: 0.2rem 0 0.2rem 1.2rem;
+      font-size: 0.95rem;
+    }
+    .product-list li::before {
+      content: '•';
+      position: absolute; left: 0;
+      color: var(--accent);
+    }
+
+    /* ── Grill package include list ──────────────────────────── */
+    .include-list {
+      list-style: none;
+      margin-top: 1.2rem;
+    }
+    .include-list li {
+      position: relative;
+      padding: 0rem 0 0rem 1.4rem;
+      font-size: 0.95rem;
+    }
+    .include-list li::before {
+      content: '–';
+      position: absolute; left: 0;
+      color: var(--accent);
+    }
+
+    /* ── Find Us / Map ───────────────────────────────────────── */
+    /* Desktop: map left, info right */
+    @media (min-width: 769px) {
+      .findus-info   { order: 2; }
+      .map-container { order: 1; }
+    }
+
+    .map-wrapper {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+    }
+    .map-wrapper iframe {
+      width: 100%; height: 100%;
+      border: 0; display: block;
+    }
+    .map-link {
+      position: absolute; inset: 0;
+      display: block; z-index: 2;
+    }
+
+    address { font-style: normal; margin-bottom: 1.5rem; }
+    .address-link {
+      text-decoration: none;
+      line-height: 2;
+      border-bottom: 1px solid var(--divider);
+      display: inline-block;
+    }
+    .address-link:hover { border-bottom-color: var(--accent); }
+
+    .hours-label {
+      display: block;
+      font: 700 0.63rem/1 var(--f-ui);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.65rem;
+    }
+    .hours-table {
+      width: 100%; border-collapse: collapse;
+      margin-bottom: 1.75rem;
+      font-family: var(--f-ui);
+    }
+    .hours-table td {
+      padding: 0.3rem 0;
+      font-size: 0.875rem;
+      vertical-align: top;
+    }
+    .hours-table td:last-child { text-align: right; padding-left: 1rem; }
+    .hours-italic { font-style: italic; }
+
+    .hours-note {
+      font-size: 0.875rem;
+      font-style: italic;
+      opacity: 0.7;
+      margin-bottom: 0.9rem;
+    }
+    .contact-text {
+      font-size: 0.9rem;
+    }
+    .contact-text a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .contact-text a:hover { opacity: 0.75; }
+
+    /* ── Footer ──────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--divider);
+      padding: 2.5rem 0;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-brand {
+      font-family: var(--f-head);
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--accent);
+      flex: 1;
+    }
+    .footer-copy {
+      font-size: 0.78rem;
+      opacity: 0.6;
+      text-align: center;
+      flex: 2;
+    }
+    .footer-links {
+      display: flex;
+      gap: 0.5rem; align-items: center;
+      font-size: 0.78rem;
+      flex: 1; justify-content: flex-end;
+      flex-wrap: wrap;
+    }
+    .footer-links a { text-decoration: none; opacity: 0.65; }
+    .footer-links a:hover { opacity: 1; text-decoration: underline; }
+    .footer-links .sep { opacity: 0.35; font-size: 0.6rem; }
+
+    @media (max-width: 600px) {
+      .footer-inner { flex-direction: column; text-align: center; }
+      .footer-brand,
+      .footer-links { justify-content: center; flex: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════════════════════════════════════════════════════════════
+       HEADER / HERO
+       ════════════════════════════════════════════════════════════ -->
+  <header>
+    <img
+      src="logo.png"
+      alt="Viltbutiken Öregrund"
+      class="site-logo"
+      onerror="this.style.display='none'"
+    >
+    <h1 class="site-title">Viltbutiken Öregrund</h1>
+  </header>
+  <main>
+
+    <!-- ══════════════════════════════════════════════════════════
+         OM VILTBUTIKEN
+         ══════════════════════════════════════════════════════════ -->
+    <section id="om" aria-labelledby="about-heading">
+      <div class="container">
+        <div class="two-col">
+          <div class="photo-placeholder" role="img" aria-label="Foto av butiken och omgivningen">
+            Foto av butiken och omgivningen
+          </div>
+          <div class="body-text">
+            <h2 id="about-heading" class="section-heading">Om Butiken</h2>
+            <p>Välkommen till oss. Här inne på vår gård hittar du en butik... </p>
+            <p>Vi arbetar med här.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="branch-divider" aria-hidden="true">
+      <img src="branch.png" alt="" onerror="this.style.display='none'">
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         UTBUD
+         ══════════════════════════════════════════════════════════ -->
+    <section id="utbud" aria-labelledby="products-heading">
+      <div class="container">
+        <div class="two-col">
+          <div>
+            <h2 id="products-heading" class="section-heading">Utbud</h2>
+            <div class="product-group">
+              <p class="product-group-label">VILT &amp; FISK</p>
+              <ul class="product-list">
+                <li>VIltkött av olika sort från BLABLA</li>
+                <li>Rökt fisk från BLA BLA</li>
+                <li>Keramik, skärbrädor</li>
+              </ul>
+            </div>
+            <div class="product-group">
+              <p class="product-group-label">SKINN &amp; HANTVERK</p>
+              <ul class="product-list">
+                <li>Beredda fårskinn och viltpälsskinn</li>
+                <li>Handgjorda detaljer i horn och läder</li>
+              </ul>
+            </div>
+          </div>
+          <div class="photo-placeholder" role="img" aria-label="Produktfoto">
+            Produktfoto
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="branch-divider" aria-hidden="true">
+      <img src="branch.png" alt="" onerror="this.style.display='none'">
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         GRILLPAKET
+         ══════════════════════════════════════════════════════════ -->
+    <section id="grillpaket" aria-labelledby="grill-heading">
+      <div class="container">
+        <div class="two-col">
+          <div class="photo-placeholder" role="img" aria-label="Grill på klipporna vid vattnet">
+            Foto – grill vid klipporna
+          </div>
+          <div class="body-text">
+            <h2 id="grill-heading" class="section-heading">Grilla vid klipporna</h2>
+            <p>Hyr ett komplett grillpaket och njut av en grillkväll direkt på klipporna vid vattnet. Allt är förberett – du behöver bara ta dig dit.</p>
+            <p>I paketet ingår:</p>
+            <ul class="include-list">
+              <li>Grill</li>
+              <li>Kol</li>
+              <li>Tändare och tändklossar</li>
+              <li>Kött från våra leverantörer – efter säsongens utbud</li>
+              <li>Lemonad</li>
+              <li>Snacks</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="branch-divider" aria-hidden="true">
+      <img src="branch.png" alt="" onerror="this.style.display='none'">
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         HITTA HIT
+         ══════════════════════════════════════════════════════════ -->
+    <section id="hitta-hit" aria-labelledby="findus-heading">
+      <div class="container">
+        <div class="two-col">
+
+          <!-- Info: right on desktop, first on mobile -->
+          <div class="findus-info">
+            <h2 id="findus-heading" class="section-heading">Hitta hit</h2>
+
+            <address>
+              <a
+                href="https://maps.google.com/?q=R%C3%A5dmansgatan+4,+742+42+%C3%96regrund"
+                target="_blank" rel="noopener noreferrer"
+                class="address-link"
+                aria-label="Öppna adress i Google Maps"
+              >
+                Rådmansgatan 4<br>
+                742 42 Öregrund
+              </a>
+            </address>
+
+            <span class="hours-label">ÖPPETTIDER</span>
+            <p class="hours-note">Våra öppettider varierar. Ibland håller vi på med annat och är inte hemma. Men generellt:</p>
+            <table class="hours-table">
+              <tbody>
+                <tr>
+                  <td>Vardagar &amp; lördagar</td>
+                  <td>10:00 – 18:00</td>
+                </tr>
+                <tr>
+                  <td>Söndagar</td>
+                  <td class="hours-italic">Oftast stängt</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p class="contact-text">Kontakt: <a href="mailto:viltbutikenoregrund@gmail.com">viltbutikenoregrund@gmail.com</a></p>
+          </div>
+
+          <!-- Map: left on desktop, second on mobile -->
+          <div class="map-container">
+            <div class="map-wrapper">
+              <iframe
+                src="https://www.google.com/maps?q=Roslagsv%C3%A4gen+1%2C+742+42+%C3%96regrund%2C+Sweden&output=embed&hl=sv"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Karta till Viltbutiken Öregrund"
+              ></iframe>
+              <a
+                href="https://maps.google.com/?q=Roslagsv%C3%A4gen+1,+742+42+%C3%96regrund"
+                target="_blank" rel="noopener noreferrer"
+                class="map-link"
+                aria-label="Öppna Google Maps för vägbeskrivning"
+              ></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ════════════════════════════════════════════════════════════
+       FOOTER
+       ════════════════════════════════════════════════════════════ -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-brand">Viltbutiken Öregrund</span>
+        <p class="footer-copy">© 2024 Viltbutiken Öregrund – Handplockat från skogens skafferi.</p>
+        <nav class="footer-links" aria-label="Sidfotslänkar">
+          <a href="#">Integritetspolicy</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
