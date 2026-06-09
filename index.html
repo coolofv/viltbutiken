@@ -55,7 +55,7 @@
       padding: 5.5rem 1.5rem 2rem;
     }
     .site-logo {
-      width: 300.px; height: 300px;
+      width: 220px; height: 220px;
       object-fit: contain;
       margin: 0 auto 1.75rem;
     }
@@ -111,6 +111,18 @@
       font: 0.78rem/1.5 var(--f-ui);
       text-align: center;
       padding: 1rem;
+    }
+
+    /* ── Section images ──────────────────────────────────────── */
+    .section-img-wrap {
+      overflow: hidden;
+      aspect-ratio: 3 / 4;
+    }
+    .section-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     /* ── Products ────────────────────────────────────────────── */
@@ -348,7 +360,7 @@
       class="site-logo"
       onerror="this.style.display='none'"
     >
-    <h1 class="site-title">Viltbutiken Öregrund</h1>
+    <h1 class="site-title" style="display:none">Viltbutiken Öregrund</h1>
   </header>
   <main>
 
@@ -358,8 +370,8 @@
     <section id="om" aria-labelledby="about-heading">
       <div class="container">
         <div class="two-col">
-          <div class="photo-placeholder" role="img" aria-label="Foto av butiken och omgivningen">
-            Foto av butiken och omgivningen
+          <div class="section-img-wrap">
+            <img src="shop.jpg" alt="Viltbutiken Öregrund – uteplatsen med blommor och röd byggnad" style="object-position: center 30%;">
           </div>
           <div class="body-text">
             <h2 id="about-heading" class="section-heading">Om Butiken</h2>
@@ -427,8 +439,8 @@
     <section id="grillpaket" aria-labelledby="grill-heading">
       <div class="container">
         <div class="two-col">
-          <div class="photo-placeholder" role="img" aria-label="Grill på klipporna vid vattnet">
-            Foto – grill vid klipporna
+          <div class="section-img-wrap">
+            <img src="grill.jpg" alt="Hurricane Grill Box – grillpaket för uthyrning" style="object-position: center 60%;">
           </div>
           <div class="body-text">
             <h2 id="grill-heading" class="section-heading">Grilla vid klipporna</h2>
