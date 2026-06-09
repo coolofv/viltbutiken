@@ -175,15 +175,11 @@
       .carousel-item { flex: 0 0 72vw; }
     }
     .carousel-img {
-      background: #DDDDDD;
+      width: 100%;
       aspect-ratio: 3 / 4;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #888;
-      font: 0.72rem/1.4 var(--f-ui);
-      text-align: center;
-      padding: 0.75rem;
+      object-fit: cover;
+      display: block;
+      background: #DDDDDD;
     }
     .carousel-label {
       font-family: var(--f-head);
@@ -371,7 +367,7 @@
       <div class="container">
         <div class="two-col">
           <div class="section-img-wrap">
-            <img src="shop.jpg" alt="Viltbutiken Öregrund – uteplatsen med blommor och röd byggnad" style="object-position: center 30%;">
+            <img src="images/shop.jpg" alt="Viltbutiken Öregrund – uteplatsen med blommor och röd byggnad" style="object-position: center 30%;">
           </div>
           <div class="body-text">
             <h2 id="about-heading" class="section-heading">Om Butiken</h2>
@@ -399,27 +395,23 @@
           <div class="carousel" id="product-carousel">
 
             <div class="carousel-item">
-              <div class="carousel-img" role="img" aria-label="Älgfilé">Foto</div>
+              <img class="carousel-img" src="images/produkt1.jpg" alt="Produkt 1">
             </div>
 
             <div class="carousel-item">
-              <div class="carousel-img" role="img" aria-label="Rökt fisk">Foto</div>
+              <img class="carousel-img" src="images/produkt2.jpg" alt="Produkt 2">
             </div>
 
             <div class="carousel-item">
-              <div class="carousel-img" role="img" aria-label="Rådjursstek">Foto</div>
+              <img class="carousel-img" src="images/produkt3.jpg" alt="Produkt 3">
             </div>
 
             <div class="carousel-item">
-              <div class="carousel-img" role="img" aria-label="Vildsvinssalami">Foto</div>
+              <img class="carousel-img" src="images/produkt4.jpg" alt="Produkt 4">
             </div>
 
             <div class="carousel-item">
-              <div class="carousel-img" role="img" aria-label="Fårskinn">Foto</div>
-            </div>
-
-            <div class="carousel-item">
-              <div class="carousel-img" role="img" aria-label="Hantverk i horn">Foto</div>
+              <img class="carousel-img" src="images/produkt5.jpg" alt="Produkt 5">
             </div>
 
           </div>
@@ -440,7 +432,7 @@
       <div class="container">
         <div class="two-col">
           <div class="section-img-wrap">
-            <img src="grill.jpg" alt="Hurricane Grill Box – grillpaket för uthyrning" style="object-position: center 60%;">
+            <img src="images/grill.jpg" alt="Hurricane Grill Box – grillpaket för uthyrning" style="object-position: center 60%;">
           </div>
           <div class="body-text">
             <h2 id="grill-heading" class="section-heading">Grilla vid klipporna</h2>
