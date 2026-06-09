@@ -134,6 +134,82 @@
       color: var(--accent);
     }
 
+    /* ── Carousel ───────────────────────────────────────────── */
+    .carousel-wrap {
+      position: relative;
+      margin-top: 3rem;
+    }
+    .carousel {
+      display: flex;
+      gap: 1.25rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 0.5rem;
+      /* hide scrollbar */
+      scrollbar-width: none;
+    }
+    .carousel::-webkit-scrollbar { display: none; }
+
+    .carousel-item {
+      scroll-snap-align: start;
+      flex: 0 0 240px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    @media (max-width: 600px) {
+      .carousel-item { flex: 0 0 72vw; }
+    }
+    .carousel-img {
+      background: #DDDDDD;
+      aspect-ratio: 3 / 4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #888;
+      font: 0.72rem/1.4 var(--f-ui);
+      text-align: center;
+      padding: 0.75rem;
+    }
+    .carousel-label {
+      font-family: var(--f-head);
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--accent);
+      line-height: 1.2;
+    }
+    .carousel-sublabel {
+      font-size: 0.78rem;
+      opacity: 0.6;
+      font-family: var(--f-ui);
+      margin-top: 0.1rem;
+    }
+
+    .carousel-btn {
+      display: none;
+      position: absolute;
+      top: calc(50% - 2rem);
+      transform: translateY(-50%);
+      background: var(--bg);
+      border: 1px solid var(--divider);
+      width: 2.4rem; height: 2.4rem;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      color: var(--accent);
+      z-index: 2;
+      transition: border-color 0.2s;
+    }
+    .carousel-btn:hover { border-color: var(--accent); }
+    .carousel-btn.prev { left: -1.3rem; }
+    .carousel-btn.next { right: -1.3rem; }
+    @media (min-width: 769px) {
+      .carousel-btn { display: flex; }
+    }
+
     /* ── Grill package include list ──────────────────────────── */
     .include-list {
       list-style: none;
@@ -326,6 +402,52 @@
             Produktfoto
           </div>
         </div>
+
+        <!-- Karusell -->
+        <div class="carousel-wrap" aria-label="Produktkarusell">
+          <button class="carousel-btn prev" aria-label="Föregående" onclick="scrollCarousel(this, -1)">&#8592;</button>
+          <div class="carousel" id="product-carousel">
+
+            <div class="carousel-item">
+              <div class="carousel-img" role="img" aria-label="Älgfilé">Foto</div>
+              <div class="carousel-label">Älgfilé</div>
+              <div class="carousel-sublabel">Vilt &amp; kött</div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="carousel-img" role="img" aria-label="Rökt fisk">Foto</div>
+              <div class="carousel-label">Rökt fisk</div>
+              <div class="carousel-sublabel">Från kusten</div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="carousel-img" role="img" aria-label="Rådjursstek">Foto</div>
+              <div class="carousel-label">Rådjursstek</div>
+              <div class="carousel-sublabel">Vilt &amp; kött</div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="carousel-img" role="img" aria-label="Vildsvinssalami">Foto</div>
+              <div class="carousel-label">Vildsvinssalami</div>
+              <div class="carousel-sublabel">Chark &amp; delikatesser</div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="carousel-img" role="img" aria-label="Fårskinn">Foto</div>
+              <div class="carousel-label">Fårskinn</div>
+              <div class="carousel-sublabel">Skinn &amp; pälsar</div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="carousel-img" role="img" aria-label="Hantverk i horn">Foto</div>
+              <div class="carousel-label">Hantverk i horn</div>
+              <div class="carousel-sublabel">Hantverk</div>
+            </div>
+
+          </div>
+          <button class="carousel-btn next" aria-label="Nästa" onclick="scrollCarousel(this, 1)">&#8594;</button>
+        </div>
+
       </div>
     </section>
 
@@ -443,5 +565,13 @@
       </div>
     </div>
   </footer>
+  <script>
+    function scrollCarousel(btn, dir) {
+      const carousel = btn.closest('.carousel-wrap').querySelector('.carousel');
+      const item = carousel.querySelector('.carousel-item');
+      const scrollAmount = (item.offsetWidth + 20) * 2;
+      carousel.scrollBy({ left: dir * scrollAmount, behavior: 'smooth' });
+    }
+  </script>
 </body>
 </html>
