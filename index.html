@@ -556,8 +556,8 @@
         carousel.style.transform = `translateX(${-i * itemWidth()}px)`;
       }
 
-      // Set initial position without animation
-      moveTo(idx, false);
+      // Set initial position after first layout pass
+      requestAnimationFrame(function() { moveTo(idx, false); });
 
       // After each animated step, silently jump back into the real zone
       carousel.addEventListener('transitionend', function () {
