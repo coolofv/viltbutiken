@@ -144,21 +144,21 @@
     .carousel-btn {
       display: flex;
       flex-shrink: 0;
-      background: var(--bg);
-      border: 1px solid var(--divider);
+      background: var(--accent);
+      border: 1px solid var(--accent);
       border-radius: 50%;
       width: 2.6rem; height: 2.6rem;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-size: 1rem;
-      color: var(--accent);
-      transition: border-color 0.2s, background 0.2s;
+      font-size: 1.1rem;
+      color: var(--bg);
+      -webkit-text-stroke: 0.04em currentColor;
+      transition: background 0.2s, color 0.2s;
     }
     .carousel-btn:hover {
-      border-color: var(--accent);
-      background: var(--accent);
-      color: var(--bg);
+      background: var(--bg);
+      color: var(--accent);
     }
 
     /* ── Lightbox ───────────────────────────────────────────── */
