@@ -161,6 +161,52 @@
       color: var(--bg);
     }
 
+    /* ── Lightbox ───────────────────────────────────────────── */
+    .carousel-img { cursor: zoom-in; }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4vmin;
+      background: rgba(20, 22, 18, 0.88);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+    .lightbox.open { opacity: 1; visibility: visible; }
+    .lightbox img {
+      max-width: 92vw;
+      max-height: 92vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+      transform: scale(0.96);
+      transition: transform 0.25s ease;
+      cursor: zoom-out;
+    }
+    .lightbox.open img { transform: scale(1); }
+    .lightbox-close {
+      position: absolute;
+      top: 1.4rem; right: 1.6rem;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2.4rem;
+      line-height: 1;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+    .lightbox-close:hover { opacity: 1; }
+    @media (hover: none) {
+      .carousel-img { cursor: default; }
+    }
+
     /* ── Grill package include list ──────────────────────────── */
     .include-list {
       list-style: none;
@@ -474,6 +520,13 @@
 
   </main>
 
+  <!-- ════════════════════════════════════════════════════════════
+       LIGHTBOX
+       ════════════════════════════════════════════════════════════ -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Förstorad produktbild" hidden>
+    <button class="lightbox-close" id="lightbox-close" aria-label="Stäng">&times;</button>
+    <img id="lightbox-img" src="" alt="">
+  </div>
 
   <!-- ════════════════════════════════════════════════════════════
        FOOTER
@@ -534,6 +587,47 @@
       window.addEventListener('resize', function () {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(function () { moveTo(idx, false); }, 120);
+      });
+    })();
+
+    // ── Lightbox (desktop only) ──────────────────────────────
+    (function () {
+      const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      if (!canHover) return;
+
+      const carousel = document.getElementById('product-carousel');
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const closeBtn = document.getElementById('lightbox-close');
+      if (!carousel || !lightbox) return;
+
+      function open(src, alt) {
+        lightboxImg.src = src;
+        lightboxImg.alt = alt || '';
+        lightbox.hidden = false;
+        // next frame so the transition runs
+        requestAnimationFrame(() => lightbox.classList.add('open'));
+        document.body.style.overflow = 'hidden';
+      }
+
+      function close() {
+        lightbox.classList.remove('open');
+        document.body.style.overflow = '';
+        setTimeout(() => { lightbox.hidden = true; lightboxImg.src = ''; }, 250);
+      }
+
+      // Delegation catches cloned carousel images too
+      carousel.addEventListener('click', function (e) {
+        const img = e.target.closest('.carousel-img');
+        if (img) open(img.src, img.alt);
+      });
+
+      closeBtn.addEventListener('click', close);
+      lightbox.addEventListener('click', function (e) {
+        if (e.target === lightbox || e.target === lightboxImg) close();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !lightbox.hidden) close();
       });
     })();
   </script>
