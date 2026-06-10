@@ -171,24 +171,15 @@
       transition: fill 0.2s ease;
     }
     .carousel-btn .ico {
-      fill: var(--bg);
-      transition: fill 0.2s ease;
-    }
-    .carousel-btn .det {
       fill: none;
-      stroke: var(--accent);
-      stroke-width: 1.6;
+      stroke: var(--bg);
+      stroke-width: 3;
+      stroke-linejoin: round;
       stroke-linecap: round;
       transition: stroke 0.2s ease;
     }
-    .carousel-btn .eye {
-      fill: var(--accent);
-      transition: fill 0.2s ease;
-    }
     .carousel-btn:hover .blob { fill: var(--bg); }
-    .carousel-btn:hover .ico  { fill: var(--accent); }
-    .carousel-btn:hover .det  { stroke: var(--bg); }
-    .carousel-btn:hover .eye  { fill: var(--bg); }
+    .carousel-btn:hover .ico  { stroke: var(--accent); }
     .carousel-btn.prev { left: 0.8rem; }
     .carousel-btn.next { right: 0.8rem; }
 
@@ -394,14 +385,7 @@
             <svg viewBox="0 0 48 48" aria-hidden="true">
               <path class="blob" transform="rotate(18 24 24)" d="M44.5 24 Q43.92 35.5 34 41.32 Q24 47.5 13.5 42.19 Q4.08 35.5 4 24 Q3.65 12.25 13.5 5.81 Q24 1 34.25 6.25 Q44.35 12.25 44.5 24 Z"/>
               <g transform="scale(-1,1) translate(-48,0)">
-                <path class="ico" d="M15 24 C15 18 22 14.5 28 14.5 C33 14.5 37.5 18.5 39 24 C37.5 29.5 33 33.5 28 33.5 C22 33.5 15 30 15 24 Z"/>
-                <path class="ico" d="M15 24 L9 18.5 Q11.5 24 9 29.5 Z"/>
-                <path class="ico" d="M24 15 C25 11 28 10 30.5 15 Z"/>
-                <path class="ico" d="M25 33 C26 36 28.5 36.5 30 32.5 Z"/>
-                <path class="ico" d="M30.5 26 C32 28.5 33 29 34 28 Z"/>
-                <path class="det" d="M32 18.6 C30.5 21 30.5 27 32 29.4"/>
-                <path class="det" d="M39 24 L37 25"/>
-                <circle class="eye" cx="34.5" cy="22" r="1.6"/>
+                <path class="ico" d="M13 20.2 L25.5 19.8 L25.4 14.8 L37.2 24 L25.6 33.2 L25.5 28.2 L12.8 28 Z"/>
               </g>
             </svg>
           </button>
@@ -434,14 +418,7 @@
             <svg viewBox="0 0 48 48" aria-hidden="true">
               <path class="blob" transform="rotate(-8 24 24)" d="M44.5 24 Q43.92 35.5 34 41.32 Q24 47.5 13.5 42.19 Q4.08 35.5 4 24 Q3.65 12.25 13.5 5.81 Q24 1 34.25 6.25 Q44.35 12.25 44.5 24 Z"/>
               <g>
-                <path class="ico" d="M15 24 C15 18 22 14.5 28 14.5 C33 14.5 37.5 18.5 39 24 C37.5 29.5 33 33.5 28 33.5 C22 33.5 15 30 15 24 Z"/>
-                <path class="ico" d="M15 24 L9 18.5 Q11.5 24 9 29.5 Z"/>
-                <path class="ico" d="M24 15 C25 11 28 10 30.5 15 Z"/>
-                <path class="ico" d="M25 33 C26 36 28.5 36.5 30 32.5 Z"/>
-                <path class="ico" d="M30.5 26 C32 28.5 33 29 34 28 Z"/>
-                <path class="det" d="M32 18.6 C30.5 21 30.5 27 32 29.4"/>
-                <path class="det" d="M39 24 L37 25"/>
-                <circle class="eye" cx="34.5" cy="22" r="1.6"/>
+                <path class="ico" d="M13 20.2 L25.5 19.8 L25.4 14.8 L37.2 24 L25.6 33.2 L25.5 28.2 L12.8 28 Z"/>
               </g>
             </svg>
           </button>
