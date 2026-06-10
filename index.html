@@ -207,22 +207,6 @@
       .carousel-img { cursor: default; }
     }
 
-    /* ── Grill package include list ──────────────────────────── */
-    .include-list {
-      list-style: none;
-      margin-top: 1.2rem;
-    }
-    .include-list li {
-      position: relative;
-      padding: 0.1rem 0 0.1rem 1.4rem;
-      font-size: 0.95rem;
-    }
-    .include-list li::before {
-      content: '–';
-      position: absolute; left: 0;
-      color: var(--accent);
-    }
-
     /* ── Find Us / Map ───────────────────────────────────────── */
     /* Desktop: map left, info right */
     @media (min-width: 769px) {
@@ -234,10 +218,16 @@
       position: relative;
       aspect-ratio: 4 / 3;
       overflow: hidden;
+      border: 1px solid var(--divider);
     }
     .map-wrapper iframe {
       width: 100%; height: 100%;
       border: 0; display: block;
+      filter: grayscale(0.35) sepia(0.22) contrast(0.92) brightness(1.02);
+      transition: filter 0.4s ease;
+    }
+    .map-wrapper:hover iframe {
+      filter: none;
     }
     .map-link {
       position: absolute; inset: 0;
@@ -417,15 +407,6 @@
           <div class="body-text">
             <h2 id="grill-heading" class="section-heading">Hyr ett grillpaket för dagen</h2>
             <p>Varför inte passa på och skapa en grillstund på badklipporna. Vi har all grillutrustning och allt som behövs i matväg för en lyckad grillning. Allt för att få en idyllisk matstund i vår otroliga natur.</p>
-            <p>I paketet ingår:</p>
-            <ul class="include-list">
-              <li>Grill</li>
-              <li>Kol</li>
-              <li>Tändare och tändklossar</li>
-              <li>Kött från våra leverantörer – efter säsongens utbud</li>
-              <li>Lemonad</li>
-              <li>Snacks</li>
-            </ul>
           </div>
         </div>
       </div>
