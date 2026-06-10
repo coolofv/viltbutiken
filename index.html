@@ -125,7 +125,26 @@
       flex: 0 0 360px;
     }
     @media (max-width: 600px) {
-      .carousel-item { flex: 0 0 72vw; }
+      .carousel-item { flex: 0 0 84vw; }
+      .carousel-outer { gap: 0; }
+      .carousel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 5;
+        background: rgba(29, 61, 43, 0.8);
+        border-color: transparent;
+        color: var(--bg);
+        -webkit-backdrop-filter: blur(2px);
+        backdrop-filter: blur(2px);
+      }
+      .carousel-btn.prev { left: 0.6rem; }
+      .carousel-btn.next { right: 0.6rem; }
+      /* no hover invert on touch */
+      .carousel-btn:hover {
+        background: rgba(29, 61, 43, 0.8);
+        color: var(--bg);
+      }
     }
     .carousel-img {
       width: 100%;
@@ -136,6 +155,7 @@
     }
 
     .carousel-outer {
+      position: relative;
       display: flex;
       align-items: center;
       gap: 1rem;
