@@ -257,13 +257,18 @@
     }
 
     /* ── Find-us info blocks (unified) ───────────────────────── */
-    .info-block { margin-bottom: 1.6rem; }
+    .info-block {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
     .info-block:last-child { margin-bottom: 0; }
     .info-icon {
-      width: 1.55rem; height: 1.55rem;
-      display: block;
+      flex-shrink: 0;
+      width: 1.5rem; height: 1.5rem;
       color: var(--accent);
-      margin-bottom: 0.55rem;
+      margin-top: 0.15rem;
     }
     .info-icon path,
     .info-icon circle {
@@ -480,7 +485,7 @@
 
           <!-- Info: right on desktop, first on mobile -->
           <div class="findus-info">
-            <h2 id="findus-heading" class="section-heading">Hitta hit</h2>
+            <h2 id="findus-heading" class="section-heading">Välkommen hit</h2>
 
             <div class="info-block">
               <svg class="info-icon" viewBox="0 0 24 24" role="img" aria-label="Adress">
@@ -504,8 +509,10 @@
                 <circle cx="12" cy="12" r="8.5"/>
                 <path d="M12 7.3 L12 12 L15.6 13.7"/>
               </svg>
-              <p class="hours-big">Alla dagar 09:00 – 18:00</p>
-              <p class="info-note">Ibland håller vi på med annat och är inte hemma.</p>
+              <div class="info-body">
+                <p class="hours-big">Alla dagar 09:00 – 18:00</p>
+                <p class="info-note">Ibland håller vi på med annat och är inte hemma.</p>
+              </div>
             </div>
 
             <div class="info-block">
