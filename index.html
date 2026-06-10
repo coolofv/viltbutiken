@@ -148,9 +148,9 @@
 
     /* ── Carousel ───────────────────────────────────────────── */
     .carousel-wrap {
-      position: relative;
-      margin-top: 3rem;
       overflow: hidden;
+      flex: 1;
+      min-width: 0;
     }
     .carousel {
       display: flex;
@@ -189,25 +189,31 @@
       margin-top: 0.1rem;
     }
 
+    .carousel-outer {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 3rem;
+    }
     .carousel-btn {
       display: none;
-      position: absolute;
-      top: calc(50% - 2rem);
-      transform: translateY(-50%);
+      flex-shrink: 0;
       background: var(--bg);
       border: 1px solid var(--divider);
-      width: 2.4rem; height: 2.4rem;
+      border-radius: 50%;
+      width: 2.6rem; height: 2.6rem;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: var(--accent);
-      z-index: 2;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, background 0.2s;
     }
-    .carousel-btn:hover { border-color: var(--accent); }
-    .carousel-btn.prev { left: -1.3rem; }
-    .carousel-btn.next { right: -1.3rem; }
+    .carousel-btn:hover {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: var(--bg);
+    }
     @media (min-width: 769px) {
       .carousel-btn { display: flex; }
     }
@@ -384,30 +390,32 @@
         <h2 id="products-heading" class="section-heading" style="margin-bottom: 1.8rem;">Utbud</h2>
 
         <!-- Karusell -->
-        <div class="carousel-wrap" aria-label="Produktkarusell">
+        <div class="carousel-outer" aria-label="Produktkarusell">
           <button class="carousel-btn prev" aria-label="Föregående" onclick="scrollCarousel(this, -1)">&#8592;</button>
-          <div class="carousel" id="product-carousel">
+          <div class="carousel-wrap">
+            <div class="carousel" id="product-carousel">
 
-            <div class="carousel-item">
-              <img class="carousel-img" src="images/produkt1.jpg" alt="Produkt 1">
+              <div class="carousel-item">
+                <img class="carousel-img" src="images/produkt1.jpg" alt="Produkt 1">
+              </div>
+
+              <div class="carousel-item">
+                <img class="carousel-img" src="images/produkt2.jpg" alt="Produkt 2">
+              </div>
+
+              <div class="carousel-item">
+                <img class="carousel-img" src="images/produkt3.jpg" alt="Produkt 3">
+              </div>
+
+              <div class="carousel-item">
+                <img class="carousel-img" src="images/produkt4.jpg" alt="Produkt 4">
+              </div>
+
+              <div class="carousel-item">
+                <img class="carousel-img" src="images/produkt5.jpg" alt="Produkt 5">
+              </div>
+
             </div>
-
-            <div class="carousel-item">
-              <img class="carousel-img" src="images/produkt2.jpg" alt="Produkt 2">
-            </div>
-
-            <div class="carousel-item">
-              <img class="carousel-img" src="images/produkt3.jpg" alt="Produkt 3">
-            </div>
-
-            <div class="carousel-item">
-              <img class="carousel-img" src="images/produkt4.jpg" alt="Produkt 4">
-            </div>
-
-            <div class="carousel-item">
-              <img class="carousel-img" src="images/produkt5.jpg" alt="Produkt 5">
-            </div>
-
           </div>
           <button class="carousel-btn next" aria-label="Nästa" onclick="scrollCarousel(this, 1)">&#8594;</button>
         </div>
@@ -477,12 +485,8 @@
             <table class="hours-table">
               <tbody>
                 <tr>
-                  <td>Vardagar &amp; lördagar</td>
-                  <td>10:00 – 18:00</td>
-                </tr>
-                <tr>
-                  <td>Söndagar</td>
-                  <td class="hours-italic">Oftast stängt</td>
+                  <td>Alla dagar</td>
+                  <td>09:00 – 18:00</td>
                 </tr>
               </tbody>
             </table>
