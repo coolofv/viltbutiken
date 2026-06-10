@@ -259,13 +259,19 @@
     /* ── Find-us info blocks (unified) ───────────────────────── */
     .info-block { margin-bottom: 1.6rem; }
     .info-block:last-child { margin-bottom: 0; }
-    .info-label {
+    .info-icon {
+      width: 1.55rem; height: 1.55rem;
       display: block;
-      font: 700 0.63rem/1 var(--f-ui);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.55rem;
+    }
+    .info-icon path,
+    .info-icon circle {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
     .info-block address { font-style: normal; line-height: 1.6; }
     .info-link {
@@ -477,7 +483,11 @@
             <h2 id="findus-heading" class="section-heading">Hitta hit</h2>
 
             <div class="info-block">
-              <span class="info-label">Adress</span>
+              <svg class="info-icon" viewBox="0 0 24 24" role="img" aria-label="Adress">
+                <title>Adress</title>
+                <path d="M12 21.5 C11 20 5 13.8 5 9 A7 7 0 1 1 19 9 C19 13.8 13 20 12 21.5 Z"/>
+                <circle cx="12" cy="9" r="2.6"/>
+              </svg>
               <address>
                 <a
                   href="https://www.google.com/maps/place/Viltbutiken+%C3%96regrund/data=!4m2!3m1!1s0x46606bb455119617:0xf5c1bfcfb8ace983?hl=en"
@@ -489,13 +499,21 @@
             </div>
 
             <div class="info-block">
-              <span class="info-label">Öppettider</span>
+              <svg class="info-icon" viewBox="0 0 24 24" role="img" aria-label="Öppettider">
+                <title>Öppettider</title>
+                <circle cx="12" cy="12" r="8.5"/>
+                <path d="M12 7.3 L12 12 L15.6 13.7"/>
+              </svg>
               <p class="hours-big">Alla dagar 09:00 – 18:00</p>
               <p class="info-note">Ibland håller vi på med annat och är inte hemma.</p>
             </div>
 
             <div class="info-block">
-              <span class="info-label">Kontakt</span>
+              <svg class="info-icon" viewBox="0 0 24 24" role="img" aria-label="Kontakt">
+                <title>Kontakt</title>
+                <path d="M4 6.8 L20 6.8 L20 17.2 L4 17.2 Z"/>
+                <path d="M4.4 7.4 L12 13 L19.6 7.4"/>
+              </svg>
               <p><a class="info-link" href="mailto:viltbutikenoregrund@gmail.com">viltbutikenoregrund@gmail.com</a></p>
             </div>
           </div>
