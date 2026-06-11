@@ -126,8 +126,13 @@
       /* transition set by JS */
     }
 
+    /* Slide width = a clean fraction of the carousel, so a whole number
+       of slides always fits (gap is 1.25rem). 3-up desktop, 2-up tablet. */
     .carousel-item {
-      flex: 0 0 360px;
+      flex: 0 0 calc((100% - 2 * 1.25rem) / 3);
+    }
+    @media (max-width: 900px) {
+      .carousel-item { flex: 0 0 calc((100% - 1.25rem) / 2); }
     }
     @media (max-width: 600px) {
       .carousel { gap: 0; }
