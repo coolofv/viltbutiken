@@ -584,7 +584,8 @@
       let idx = N;
 
       function itemWidth() {
-        const gap = parseFloat(getComputedStyle(carousel).gap) || 20;
+        let gap = parseFloat(getComputedStyle(carousel).gap);
+        if (Number.isNaN(gap)) gap = 0;
         return carousel.children[0].offsetWidth + gap;
       }
 
