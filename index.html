@@ -114,6 +114,27 @@
     }
     .body-text p + p { margin-top: 1rem; }
 
+    /* ── Price list ──────────────────────────────────────────── */
+    .price-label {
+      display: block;
+      font: 700 0.63rem/1 var(--f-ui);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 1.6rem 0 0.7rem;
+    }
+    .price-list { list-style: none; }
+    .price-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.5rem 0;
+      font-size: 1rem;
+      border-bottom: 1px solid var(--divider);
+    }
+    .price-list li:first-child { border-top: 1px solid var(--divider); }
+    .price-list .price { color: var(--accent); white-space: nowrap; }
+
     /* ── Section images ──────────────────────────────────────── */
     .section-img-wrap {
       overflow: hidden;
@@ -475,6 +496,13 @@
             <p>Slöa och trista knivar i köket? Vi slipar upp köksknivar snabbt.</p>
             <p>Lämna in slöa köksknivar till oss på morgonen och få tillbaka välslipade drömknivar samma dag eller dagen efter.</p>
             <p>Vi slipar även yxor.</p>
+
+            <span class="price-label">Priser</span>
+            <ul class="price-list">
+              <li><span>Kniv</span><span class="price">125 kr/st</span></li>
+              <li><span>Yxa</span><span class="price">150–200 kr/st</span></li>
+            </ul>
+            <p class="info-note">Yxor prissätts efter skick.</p>
           </div>
           <div class="section-img-wrap">
             <img src="images/knivslip.jpeg" alt="Knivslipning – välslipade knivar" loading="lazy" decoding="async">
