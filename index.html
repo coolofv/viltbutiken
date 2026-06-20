@@ -125,15 +125,15 @@
     }
     .price-list { list-style: none; }
     .price-list li {
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 0.5rem 0;
+      position: relative;
+      padding: 0.25rem 0 0.25rem 1.2rem;
       font-size: 1rem;
-      border-bottom: 1px solid var(--divider);
     }
-    .price-list li:first-child { border-top: 1px solid var(--divider); }
-    .price-list .price { color: var(--accent); white-space: nowrap; }
+    .price-list li::before {
+      content: '–';
+      position: absolute; left: 0;
+      color: var(--accent);
+    }
 
     /* ── Section images ──────────────────────────────────────── */
     .section-img-wrap {
@@ -499,10 +499,9 @@
 
             <span class="price-label">Priser</span>
             <ul class="price-list">
-              <li><span>Kniv</span><span class="price">125 kr/st</span></li>
-              <li><span>Yxa</span><span class="price">150–200 kr/st</span></li>
+              <li>Kniv 125 kr/st</li>
+              <li>Yxa 150–200 kr/st (pris beroende på skick)</li>
             </ul>
-            <p class="info-note">Yxor prissätts efter skick.</p>
           </div>
           <div class="section-img-wrap">
             <img src="images/knivslip.jpeg" alt="Knivslipning – välslipade knivar" loading="lazy" decoding="async">
