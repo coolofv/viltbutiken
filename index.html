@@ -356,9 +356,184 @@
       .footer-inner { flex-direction: column; text-align: center; }
       .footer-links { justify-content: center; }
     }
+    /* ── News blob ───────────────────────────────────────────── */
+    .news-blob-wrap {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      background: rgba(20, 22, 18, 0.45);
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+    .news-blob-wrap.collapsed {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .news-blob {
+      background: rgba(29, 61, 43, 0.9);
+      color: var(--bg);
+      max-width: 640px;
+      width: 100%;
+      border-radius: 62% 38% 46% 54% / 56% 44% 56% 44%;
+      font-family: var(--f-body);
+      font-size: 0.95rem;
+      line-height: 1.75;
+      text-align: center;
+      position: relative;
+      transform-origin: top right;
+      padding: 3rem 2.8rem;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s ease;
+      animation: blob-wave 12s ease-in-out infinite;
+    }
+    @keyframes blob-wave {
+      0%, 100% { border-radius: 62% 38% 46% 54% / 56% 44% 56% 44%; }
+      25%      { border-radius: 54% 46% 38% 62% / 48% 56% 44% 52%; }
+      50%      { border-radius: 46% 54% 58% 42% / 52% 48% 60% 40%; }
+      75%      { border-radius: 58% 42% 50% 50% / 60% 40% 48% 52%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .news-blob { animation: none; }
+    }
+    .news-blob.shrinking {
+      transform: scale(0.05);
+      opacity: 0;
+    }
+    .news-blob p + p { margin-top: 0.9rem; }
+    .news-blob-label {
+      display: inline-block;
+      font-family: var(--f-ui);
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      opacity: 0.65;
+      margin-bottom: 0.6rem;
+    }
+    .news-close-btn {
+      position: absolute;
+      top: 1.2rem; right: 2.2rem;
+      width: 2.6rem; height: 2.6rem;
+      background: var(--accent);
+      border: none;
+      border-radius: 50%;
+      color: var(--bg);
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      padding: 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transition: transform 0.15s ease, background 0.2s ease;
+    }
+    .news-close-btn:hover {
+      transform: scale(1.1);
+      background: #244c36;
+    }
+
+    /* ── News plupp (minimized bubble) ───────────────────────── */
+    .news-plupp {
+      position: fixed;
+      top: 1.5rem; right: 1.5rem;
+      height: 3.4rem;
+      padding: 0 0.85rem;
+      background: rgba(29, 61, 43, 0.9);
+      border-radius: 1.7rem;
+      border: none;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.22);
+      color: var(--bg);
+      z-index: 50;
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(0.1);
+      transform-origin: top right;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .news-plupp.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1);
+    }
+    .news-plupp svg {
+      width: 1.55rem; height: 1.55rem;
+      flex-shrink: 0;
+    }
+    .news-plupp path,
+    .news-plupp circle {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .news-plupp circle.dot { fill: currentColor; stroke: none; }
+    .news-plupp-label {
+      font-family: var(--f-ui);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      max-width: 0;
+      opacity: 0;
+      overflow: hidden;
+      margin-left: 0;
+      transition: max-width 0.4s ease, opacity 0.3s ease, margin-left 0.4s ease;
+    }
+    /* Desktop: expand into a pill on hover/focus */
+    @media (hover: hover) {
+      .news-plupp:hover .news-plupp-label,
+      .news-plupp:focus-visible .news-plupp-label {
+        max-width: 9rem;
+        opacity: 1;
+        margin-left: 0.5rem;
+      }
+    }
+    /* Touch: no hover, so show the full pill by default */
+    @media (hover: none) {
+      .news-plupp-label {
+        max-width: 9rem;
+        opacity: 1;
+        margin-left: 0.5rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .news-blob {
+        border-radius: 52% 48% 44% 56% / 46% 54% 46% 54%;
+        padding: 1.8rem 1.8rem 2rem;
+        font-size: 0.9rem;
+      }
+    }
   </style>
 </head>
 <body>
+
+  <!-- ════════════════════════════════════════════════════════════
+       NEWS BLOB
+       ════════════════════════════════════════════════════════════ -->
+  <div class="news-blob-wrap" id="news-wrap">
+    <div class="news-blob" id="news-blob" role="note">
+      <button class="news-close-btn" id="news-close" aria-label="Minimera nyheter">&times;</button>
+      <span class="news-blob-label">Senaste nytt – 21/6</span>
+      <p>Idag fylls våra frysar med nylevererad älgfärs, älgskav och renskav.</p>
+      <p>Vill man lägga en härlig och smakrik korv på grillen så har vi just fått nyleverans av vår nitritfria Ramslök &amp; Örtgrillare i fyrpack.</p>
+      <p>Vi har också fyllt på hyllorna med vårt förrädiskt goda chokladdoppade tunnbröd i tre smaker.</p>
+    </div>
+  </div>
+
+  <!-- Minimized news plupp -->
+  <button class="news-plupp" id="news-plupp" aria-label="Visa senaste nytt">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 4 C8.7 4 7 6.3 7 9.5 C7 13.5 5.5 15 5.5 15 L18.5 15 C18.5 15 17 13.5 17 9.5 C17 6.3 15.3 4 12 4 Z"/>
+      <path d="M10 18 A2.2 2.2 0 0 0 14 18"/>
+      <circle class="dot" cx="17.6" cy="6.4" r="2.2"/>
+    </svg>
+    <span class="news-plupp-label">Senaste nytt</span>
+  </button>
 
   <!-- ════════════════════════════════════════════════════════════
        HEADER / HERO
@@ -666,6 +841,44 @@
           moveTo(idx, true);
         }
       }, { passive: true });
+    })();
+
+    // ── News blob minimize / restore ────────────────────────
+    (function () {
+      const wrap   = document.getElementById('news-wrap');
+      const blob   = document.getElementById('news-blob');
+      const close  = document.getElementById('news-close');
+      const plupp  = document.getElementById('news-plupp');
+      if (!wrap || !blob || !close || !plupp) return;
+
+      function minimize() {
+        blob.classList.add('shrinking');
+        setTimeout(function () {
+          wrap.classList.add('collapsed');
+          plupp.classList.add('visible');
+        }, 350);
+      }
+
+      function restore() {
+        plupp.classList.remove('visible');
+        wrap.classList.remove('collapsed');
+        setTimeout(function () {
+          blob.classList.remove('shrinking');
+        }, 30);
+      }
+
+      close.addEventListener('click', minimize);
+      plupp.addEventListener('click', restore);
+
+      // Click outside the blob (on the dimmed backdrop) minimizes too
+      wrap.addEventListener('click', function (e) {
+        if (e.target === wrap) minimize();
+      });
+
+      // Esc minimizes when the overlay is open
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !wrap.classList.contains('collapsed')) minimize();
+      });
     })();
 
     // ── Lightbox (desktop only) ──────────────────────────────
