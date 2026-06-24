@@ -412,6 +412,37 @@
       opacity: 0.65;
       margin-bottom: 0.6rem;
     }
+    .news-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .news-nav[hidden] { display: none; }
+    .news-nav-btn {
+      width: 2.1rem; height: 2.1rem;
+      border: 1px solid rgba(245, 240, 232, 0.5);
+      background: none;
+      color: var(--bg);
+      border-radius: 50%;
+      font-family: var(--f-ui);
+      font-size: 1rem;
+      line-height: 1;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s ease, opacity 0.2s ease, border-color 0.2s ease;
+    }
+    .news-nav-btn:hover:not(:disabled) { background: rgba(245, 240, 232, 0.15); }
+    .news-nav-btn:disabled { opacity: 0.25; cursor: default; }
+    .news-pageinfo {
+      font-family: var(--f-ui);
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      opacity: 0.7;
+      min-width: 2.6rem;
+      text-align: center;
+    }
     .news-close-btn {
       position: absolute;
       top: 1.2rem; right: 2.2rem;
@@ -515,13 +546,16 @@
   <!-- ════════════════════════════════════════════════════════════
        NEWS BLOB
        ════════════════════════════════════════════════════════════ -->
-  <div class="news-blob-wrap" id="news-wrap">
+  <div class="news-blob-wrap collapsed" id="news-wrap">
     <div class="news-blob" id="news-blob" role="note">
       <button class="news-close-btn" id="news-close" aria-label="Minimera nyheter">&times;</button>
-      <span class="news-blob-label">Senaste nytt – 21/6</span>
-      <p>Idag fylls våra frysar med nylevererad älgfärs, älgskav och renskav.</p>
-      <p>Vill man lägga en härlig och smakrik korv på grillen så har vi just fått nyleverans av vår nitritfria Ramslök &amp; Örtgrillare i fyrpack.</p>
-      <p>Vi har också fyllt på hyllorna med vårt förrädiskt goda chokladdoppade tunnbröd i tre smaker.</p>
+      <span class="news-blob-label" id="news-date"></span>
+      <div class="news-body" id="news-body" aria-live="polite"></div>
+      <div class="news-nav" id="news-nav" hidden>
+        <button class="news-nav-btn" id="news-prev" aria-label="Nyare nyhet">&lt;</button>
+        <span class="news-pageinfo" id="news-pageinfo"></span>
+        <button class="news-nav-btn" id="news-next" aria-label="Äldre nyhet">&gt;</button>
+      </div>
     </div>
   </div>
 
@@ -843,13 +877,73 @@
       }, { passive: true });
     })();
 
-    // ── News blob minimize / restore ────────────────────────
+    // ── News blob: data, paging, minimize / restore ─────────
     (function () {
-      const wrap   = document.getElementById('news-wrap');
-      const blob   = document.getElementById('news-blob');
-      const close  = document.getElementById('news-close');
-      const plupp  = document.getElementById('news-plupp');
+      const wrap     = document.getElementById('news-wrap');
+      const blob     = document.getElementById('news-blob');
+      const close    = document.getElementById('news-close');
+      const plupp    = document.getElementById('news-plupp');
+      const dateEl   = document.getElementById('news-date');
+      const bodyEl   = document.getElementById('news-body');
+      const nav      = document.getElementById('news-nav');
+      const prevBtn  = document.getElementById('news-prev');
+      const nextBtn  = document.getElementById('news-next');
+      const pageInfo = document.getElementById('news-pageinfo');
       if (!wrap || !blob || !close || !plupp) return;
+
+      // ── News items, NEWEST FIRST. date: 'YYYY-MM-DD' ──────
+      // To add news: paste a new object at the TOP of this list.
+      const newsItems = [
+        {
+          date: '2026-06-24',
+          body:
+            '<p>Idag har vi fyllt på frysarna med en leverans från Norrland av varmrökt renhjärta.</p>' +
+            '<p>Vi kan också locka med nylevererad ytterfilé från ren och dovhjort i vakuumförpackningar från ett halvt kilo till ett och ett halvt. Välkomna in!</p>'
+        },
+        {
+          date: '2026-06-21',
+          body:
+            '<p>Idag fylls våra frysar med nylevererad älgfärs, älgskav och renskav.</p>' +
+            '<p>Vill man lägga en härlig och smakrik korv på grillen så har vi just fått nyleverans av vår nitritfria Ramslök &amp; Örtgrillare i fyrpack.</p>' +
+            '<p>Vi har också fyllt på hyllorna med vårt förrädiskt goda chokladdoppade tunnbröd i tre smaker.</p>'
+        }
+      ];
+
+      // Format 'YYYY-MM-DD' → 'D:e Månad', e.g. '24:e Juni'
+      function fmtDate(iso) {
+        const months = ['Januari', 'Februari', 'Mars', 'April', 'Maj', 'Juni',
+          'Juli', 'Augusti', 'September', 'Oktober', 'November', 'December'];
+        const d = new Date(iso + 'T00:00:00');
+        const day = d.getDate();
+        // Swedish ordinal: ':a' for days ending in 1 or 2 (except 11/12), else ':e'
+        const ones = day % 10;
+        const suffix = (ones === 1 || ones === 2) && day !== 11 && day !== 12 ? ':a' : ':e';
+        return day + suffix + ' ' + months[d.getMonth()];
+      }
+
+      let idx = 0; // 0 = latest
+
+      function render() {
+        const item = newsItems[idx];
+        dateEl.textContent = fmtDate(item.date);
+        bodyEl.innerHTML = item.body;
+        if (newsItems.length > 1) {
+          nav.hidden = false;
+          prevBtn.disabled = (idx === 0);                    // newer
+          nextBtn.disabled = (idx === newsItems.length - 1); // older
+          pageInfo.textContent = (idx + 1) + ' / ' + newsItems.length;
+        } else {
+          nav.hidden = true;
+        }
+      }
+
+      // "<" → newer (toward today), ">" → older
+      prevBtn.addEventListener('click', function () {
+        if (idx > 0) { idx--; render(); }
+      });
+      nextBtn.addEventListener('click', function () {
+        if (idx < newsItems.length - 1) { idx++; render(); }
+      });
 
       function minimize() {
         blob.classList.add('shrinking');
@@ -860,6 +954,8 @@
       }
 
       function restore() {
+        idx = 0;          // always reopen on the latest news
+        render();
         plupp.classList.remove('visible');
         wrap.classList.remove('collapsed');
         setTimeout(function () {
@@ -879,6 +975,18 @@
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && !wrap.classList.contains('collapsed')) minimize();
       });
+
+      // ── Initial state ──────────────────────────────────────
+      // Open on the latest news, UNLESS it is older than 7 days,
+      // in which case start minimized (just the bell in the corner).
+      render();
+      const latest  = new Date(newsItems[0].date + 'T00:00:00');
+      const ageDays = (Date.now() - latest.getTime()) / 86400000;
+      if (ageDays > 7) {
+        plupp.classList.add('visible'); // stay collapsed (markup default)
+      } else {
+        wrap.classList.remove('collapsed'); // fade the overlay in
+      }
     })();
 
     // ── Lightbox (desktop only) ──────────────────────────────
